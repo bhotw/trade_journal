@@ -1,0 +1,4 @@
+This is the first entry
+This will be a test to see if i can build a real good app in c
+I am testing this out and this will trun into a real app once i am done and it will look good
+this is a test three
