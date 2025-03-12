@@ -90,5 +90,5 @@ void activate_ui(GtkApplication *app, gpointer user_data) {
     refresh_entries();
 
     // Show all widgets
-    gtk_widget_show_all(window);
+    gtk_window_present(window);
 }

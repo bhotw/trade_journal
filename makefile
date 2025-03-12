@@ -1,9 +1,22 @@
 CC = gcc
-CFLAGS = `pkg-config --cflags gtk+-3.0` -Iinclude
-LIBS = `pkg-config --libs gtk+-3.0`
-SRC = src/main.c src/ui.c src/storage.c
+CFLAGS = `pkg-config --cflags gtk4` -Iinclude
+LIBS = `pkg-config --libs gtk4`
+SRC = src/example-4.c
+OBJ = $(SRC:.c=.o)
 OUT = journal_app.exe
+UI = src/builder.ui
 
-all:
-	$(CC) $(CFLAGS) -o $(OUT) $(SRC) $(LIBS)
+all: $(OUT) $(UI)
+
+$(OUT): $(OBJ)
+	$(CC) -o $(OUT) $(OBJ) $(LIBS) -mwindows
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(UI):
+	cp $(UI) $(OUT)
+
+clean:
+	rm -f $(OBJ) $(OUT)
 
