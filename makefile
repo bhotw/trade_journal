@@ -1,22 +1,26 @@
-CC = gcc
-CFLAGS = `pkg-config --cflags gtk4` -Iinclude
-LIBS = `pkg-config --libs gtk4`
-SRC = src/example-4.c
-OBJ = $(SRC:.c=.o)
-OUT = journal_app.exe
-UI = src/builder.ui
+CC ?= gcc
+PKGCONFIG = pkg-config
+CFLAGS = $(shell $(PKGCONFIG) --cflags gtk4)
+LIBS = $(shell $(PKGCONFIG) --libs gtk4)
+GLIB_COMPILE_RESOURCES = $(shell $(PKGCONFIG) --variable=glib_compile_resources gio-2.0)
 
-all: $(OUT) $(UI)
+SRC_DIR = src
+UI_DIR = ui
+SRC = $(SRC_DIR)/journal_app.c $(SRC_DIR)/journal_appwin.c $(SRC_DIR)/main.c
+BUILT_SRC = $(SRC_DIR)/resources.c
 
-$(OUT): $(OBJ)
-	$(CC) -o $(OUT) $(OBJ) $(LIBS) -mwindows
+OBJS = $(BUILT_SRC:.c=.o) $(SRC:.c=.o)
+
+all: journalapp.exe
+
+$(SRC_DIR)/resources.c: $(SRC_DIR)/journalapp.gresource.xml $(UI_DIR)/window.ui
+	$(GLIB_COMPILE_RESOURCES) $(SRC_DIR)/journalapp.gresource.xml --target=$@ --sourcedir=$(SRC_DIR) --sourcedir=$(RSC_DIR) --generate-source
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -c -o $@ $(CFLAGS) $<
 
-$(UI):
-	cp $(UI) $(OUT)
+journalapp.exe: $(OBJS)
+	$(CC) -o $@ $(OBJS) $(LIBS)
 
 clean:
-	rm -f $(OBJ) $(OUT)
-
+	del /Q $(BUILT_SRC) $(OBJS) journalapp.exe
