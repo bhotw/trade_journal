@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/journal_app">
     <file preprocess="xml-stripblanks">ui/window.ui</file>
+    <file preprocess="xml-stripblanks">ui/gears-menu.ui</file>
   </gresource>
 </gresources>

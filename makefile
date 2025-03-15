@@ -23,4 +23,6 @@ journalapp.exe: $(OBJS)
 	$(CC) -o $@ $(OBJS) $(LIBS)
 
 clean:
-	del /Q $(BUILT_SRC) $(OBJS) journalapp.exe
+	rm -f $(BUILT_SRC) 
+	rm -f $(OBJS) 
+	rm -f journalapp.exe
