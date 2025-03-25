@@ -1,28 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="JournalAppWindow" parent="GtkApplicationWindow">
-    <property name="title" translatable="yes">Trade Journal</property>
     <property name="default-width">600</property>
     <property name="default-height">400</property>
-    <child type="titlebar">
-      <object class="GtkHeaderBar" id="header">
-        <child type="title">
-          <object class="GtkStackSwitcher" id="tabs">
-            <property name="stack">stack</property>
-          </object>
-        </child>
-        <child type="end">
-          <object class="GtkMenuButton" id="gears">
-            <property name="direction">none</property>
-          </object>
-        </child>
-      </object>
-    </child>
+    
     <child>
-      <object class="GtkBox" id="content_box">
+      <object class="GtkBox">
         <property name="orientation">vertical</property>
+        
         <child>
-          <object class="GtkStack" id="stack"/>
+          <object class="GtkBox" id="header_buttons">
+            <property name="orientation">horizontal</property>
+            <property name="spacing">10</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+            
+            <child>
+              <object class="GtkButton" id="btn_dashboard">
+                <property name="label">Dashboard</property>
+              </object>
+            </child>
+            
+            <child>
+              <object class="GtkButton" id="btn_feed">
+                <property name="label">Feed</property>
+              </object>
+            </child>
+            
+            <child>
+              <object class="GtkButton" id="btn_add_trade">
+                <property name="label">Add Trade</property>
+              </object>
+            </child>
+            
+            <child>
+              <object class="GtkButton" id="btn_add_journal">
+                <property name="label">Add Journal</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        
+        <child>
+          <object class="GtkStack" id="stack">
+            <child>
+              <object class="GtkBox" id="dashboard_page">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Dashboard Content</property>
+                  </object>
+                </child>
+              </object>
+              <property name="name">dashboard</property>
+            </child>
+            
+            <child>
+              <object class="GtkBox" id="feed_page">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Feed Content</property>
+                  </object>
+                </child>
+              </object>
+              <property name="name">feed</property>
+            </child>
+            
+            <child>
+              <object class="GtkBox" id="add_trade_page">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Add Trade Content</property>
+                  </object>
+                </child>
+              </object>
+              <property name="name">add_trade</property>
+            </child>
+            
+            <child>
+              <object class="GtkBox" id="add_journal_page">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label">Add Journal Content</property>
+                  </object>
+                </child>
+              </object>
+              <property name="name">add_journal</property>
+            </child>
+          </object>
         </child>
       </object>
     </child>
